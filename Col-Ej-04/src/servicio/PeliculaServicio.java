@@ -28,31 +28,32 @@ Después de ese bucle realizaremos las siguientes acciones:
 */
 public class PeliculaServicio {
     
-    Scanner leer = new Scanner(System.in);
+    private Scanner leer;
+    private ArrayList<Pelicula> peliculas;
     
-    ArrayList<Pelicula> peliculas = new ArrayList();
-    
+    public PeliculaServicio() {
+        this.leer = new Scanner(System.in);
+        this.peliculas = new ArrayList();
+    }
     public void crearPeliculas() {
         String resp, titulo, director;
         int duracion;
         
         
         do {
-        
+            leer.skip("\n");
             System.out.println("Ingresar Título de la Película:");
             titulo = leer.nextLine();
             System.out.println("Ingresar Director de la Película:");
             director = leer.nextLine();
             System.out.println("Ingresar duración de la Película:");
             duracion = leer.nextInt();
-            
-            Pelicula nuevaPelicula = new Pelicula(titulo, director, duracion);
-            
-            peliculas.add(nuevaPelicula);
+                        
+            peliculas.add(new Pelicula(titulo, director, duracion));
             
             System.out.println("¿Quiere crear otra película?(si/no)");
             resp = leer.next();
-            leer.skip("\n");
+            
             System.out.println("");
         } while (resp.equals("si"));
         
@@ -129,4 +130,41 @@ public class PeliculaServicio {
         mostrarPeliculas();
     }
      
+    public void menu() {
+        int opcion;
+        
+        do {
+            System.out.println("--------------------------------------------------------");
+            System.out.println("1. Cargar Películas");
+            System.out.println("2. Mostrar Películas");
+            System.out.println("3. Mostrar Películas con una duración mayor a 1 hora");
+            System.out.println("4. Ordenar Películas por su duración (de mayor a menor)");
+            System.out.println("5. Ordenar Películas por su duración (de menor a mayor)");
+            System.out.println("6. Ordenar Películas por su títuloa alfabéticamente");
+            System.out.println("7. Ordenar Películas por su director alfabéticamente");
+            System.out.println("8. Salir");
+            opcion = leer.nextInt();
+            
+            switch (opcion) {
+                case 1: crearPeliculas();
+                        break;
+                case 2: mostrarPeliculas();
+                        break;
+                case 3: mostrarPeliculasMas1Hora();
+                        break;
+                case 4: ordenarPorDuracionDesc();
+                        break;
+                case 5: ordenarPorDuracionAsce();
+                        break;
+                case 6: ordenarPorTituloAlfa();
+                        break;
+                case 7: ordenarPorDirectorAlfa();
+                        break;
+                case 8: System.out.println("Salir");
+                        break;
+                default: System.out.println("Opcion no Válida");
+            }
+            
+        } while (opcion != 8);
+    }
 }

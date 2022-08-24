@@ -25,21 +25,24 @@ cómo se ordena un conjunto.
 */
 public class PaisServicio {
     
-    Scanner leer = new Scanner(System.in);
+    private Scanner leer;
+    private TreeSet<Pais> paises;
     
-    TreeSet<Pais> paises = new TreeSet();
+    public PaisServicio() {
+        this.leer = new Scanner(System.in);
+        this.paises = new TreeSet();
+    }
     
     public void cargarPaises() {
         
         String resp, nombre;
         
         do {
+            leer.skip("\n");
             System.out.println("Ingresar un país");
-            nombre = leer.next();
-            
-            Pais p1 = new Pais(nombre);
-            
-            paises.add(p1);
+            nombre = leer.nextLine();
+                        
+            paises.add(new Pais(nombre));
                         
             System.out.println("¿Quiere guardar otro país?(si/no)");
             resp = leer.next();
@@ -63,11 +66,11 @@ public class PaisServicio {
     public void eliminarPais() {
         
         Iterator<Pais> it = paises.iterator();
-        
         boolean encontrado = false;
         
+        leer.skip("\n");
         System.out.println("Ingresar el País a eliminar");
-        String nombre = leer.next();
+        String nombre = leer.nextLine();
         
         while (it.hasNext()) {
             Pais aux = it.next();
@@ -87,5 +90,31 @@ public class PaisServicio {
         mostrarPaises();
     }
     
+    public void menu() {
+        int opcion;
+        
+        do {
+            System.out.println("------------------------------");
+            System.out.println("1. Agregar Paises");
+            System.out.println("2. Eliminar un País");
+            System.out.println("3. Mostrar Lista de Paises");
+            System.out.println("4. Salir");
+            opcion = leer.nextInt();
+            System.out.println("------------------------------");
+
+            switch (opcion) {
+                case 1: cargarPaises();
+                        break;
+                case 2: eliminarPais();
+                        break;
+                case 3: mostrarPaises();
+                        break;
+                case 4: System.out.println("Salir");
+                        break;
+                default: System.out.println("Opcion no Válida");
+                        break;
+            }
+        } while (opcion != 4);
+    }
    
 }

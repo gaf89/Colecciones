@@ -33,12 +33,7 @@ public class ColEj05 {
         
         PaisServicio ps = new PaisServicio();
         
-        ps.cargarPaises();
-        System.out.println("");
-        ps.mostrarPaises();
-        System.out.println("");
-        ps.eliminarPais();
-        ps.eliminarPais();
+        ps.menu();
     }
     
 }

@@ -24,13 +24,14 @@ public class ColEj01 {
      */
     public static void main(String[] args) {
         
-        PerroServicio ms = new PerroServicio();
+        PerroServicio ps = new PerroServicio();
         
-        ms.cargarRazas();
+        ps.menu();
         
-        ms.mostrarPerros();
         
-        ms.eliminarPerro();
+//        ps.cargarRazas();        
+//        ps.mostrarPerros();        
+//        ps.eliminarPerro();
     }
     
 }

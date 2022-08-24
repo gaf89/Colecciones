@@ -5,6 +5,7 @@
  */
 package servicio;
 
+import entidad.Producto;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -13,34 +14,25 @@ import java.util.Scanner;
  *
  * @author Gaston
  */
-/*
-Se necesita una aplicación para una tienda en la cual queremos almacenar los distintos
-productos que venderemos y el precio que tendrán. Además, se necesita que la
-aplicación cuente con las funciones básicas.
-Estas las realizaremos en el servicio. Como, introducir un elemento, modificar su precio,
-eliminar un producto y mostrar los productos que tenemos con su precio (Utilizar
-Hashmap). El HashMap tendrá de llave el nombre del producto y de valor el precio.
-Realizar un menú para lograr todas las acciones previamente mencionadas.
-*/
-public class ProductosServicio {
+public class ProductoServicio {
     
     private Scanner leer;
-    private HashMap<String, Double> productos;
+    private HashMap<String, Producto> productos;
     
-    public ProductosServicio() {
-        this.leer = new Scanner(System.in);
-        this.productos = new HashMap();
+    public ProductoServicio() {
+         this.leer = new Scanner(System.in).useDelimiter("\n");
+         this.productos = new HashMap();
     }
     
     public void introducirElemento() {
         leer.skip("\n");
         System.out.println("Ingresar nombre del Producto");
         String nombre = leer.nextLine();
+        
         System.out.println("Ingresar precio del Producto");
         Double precio = leer.nextDouble();
         
-        productos.put(nombre, precio);
-        
+        productos.put(nombre, new Producto(nombre, precio));        
     }
     
     public void modificarPrecio() {
@@ -49,13 +41,13 @@ public class ProductosServicio {
         String nombre = leer.nextLine();
         System.out.println("Ingresar nuevo precio para el Producto");
         Double precio = leer.nextDouble();
-        
-        for (Map.Entry<String, Double> aux : productos.entrySet()) {
-            String key = aux.getKey();
-            Double value = aux.getValue();
+                
+        for (Map.Entry<String, Producto> entry : productos.entrySet()) {
+            String key = entry.getKey();
+            Producto value = entry.getValue();
             
-            if (aux.getKey().equals(nombre)) {
-                productos.replace(nombre, precio);
+            if(entry.getKey().equals(nombre)) {
+                productos.replace(nombre, new Producto(nombre, precio));
                 System.out.println("El precio ha sido modificado");
             }
         }
@@ -66,12 +58,12 @@ public class ProductosServicio {
         System.out.println("Ingresar nombre del Producto que desea eliminar");
         String nombre = leer.nextLine();
                 
-        for (Map.Entry<String, Double> aux : productos.entrySet()) {
+        for (Map.Entry<String, Producto> aux : productos.entrySet()) {
             String key = aux.getKey();
-            Double value = aux.getValue();
+            Producto value = aux.getValue();
             
             if (aux.getKey().equals(nombre)) {
-                productos.remove(nombre);
+                productos.remove(key);
                 System.out.println("El producto ha sido eliminado");
             }
         }
@@ -79,15 +71,15 @@ public class ProductosServicio {
     
     public void mostrarProductos() {
         
-        System.out.println("");
-        System.out.println("*****************************************");
-        for (Map.Entry<String, Double> aux : productos.entrySet()) {
+        System.out.println("*************************************");
+        
+        for (Map.Entry<String, Producto> aux : productos.entrySet()) {
             String key = aux.getKey();
-            Double value = aux.getValue();
+            Producto value = aux.getValue();
             
-            System.out.println("Producto: "+key+"  Precio: $"+value);
+            System.out.println("Producto: "+key+"  Precio: $"+value.getPrecio());
         }
-        System.out.println("*****************************************");
+        System.out.println("*************************************");
     }
     
     public int menu() {

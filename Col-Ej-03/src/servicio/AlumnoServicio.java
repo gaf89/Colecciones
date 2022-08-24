@@ -23,17 +23,22 @@ pregunta al usuario si quiere crear otro Alumno o no.
 */
 public class AlumnoServicio {
     
-    Scanner leer = new Scanner(System.in);
-    ArrayList<Alumno> alumnos = new ArrayList();
+    private Scanner leer;
+    private ArrayList<Alumno> alumnos;
         
+    public AlumnoServicio() {
+        this.leer = new Scanner(System.in);
+        this.alumnos = new ArrayList();
+    }
+    
     public void crearAlumnos() {
         String resp, nombre;
                
         do {
             ArrayList notas = new ArrayList();
+            
             System.out.println("Ingrese el nombre del alumno");
             nombre = leer.next();
-            
             System.out.println("Ingresar Notas");
             System.out.print("Nota 1: ");
             notas.add(leer.nextInt());
@@ -41,10 +46,8 @@ public class AlumnoServicio {
             notas.add(leer.nextInt());
             System.out.print("Nota 3: ");
             notas.add(leer.nextInt());
-            
-            Alumno alum = new Alumno(nombre, notas);
-            
-            alumnos.add(alum);
+                        
+            alumnos.add(new Alumno(nombre, notas));
             
             System.out.println("¿Quiere crear otro alumno?(si/no)");
             resp = leer.next();
@@ -78,7 +81,6 @@ promedio final, devuelto por el método y mostrado en el main.
                 for (Integer nota : aux.getNotas()) {
                     suma += nota;
                     cont++;
-                    System.out.println(nota);
                 }
             }
         }
@@ -86,13 +88,35 @@ promedio final, devuelto por el método y mostrado en el main.
         promedio = suma / 3;
 
         if (cont > 0){
-            System.out.println("El promedio del alumno es "+promedio);
+            System.out.println("El promedio final del alumno es "+promedio);
         } else {
             System.out.println("Alumno no encontrado");
         }
 
     }
                
- 
+    public void menu() {
+        int opcion;
+        
+        do {
+            System.out.println("------------------------------");
+            System.out.println("1. Cargar Alumnos con sus notas");
+            System.out.println("2. Calcular Nota Final");
+            System.out.println("3. Salir");
+            opcion = leer.nextInt();
+            
+            switch (opcion) {
+                case 1: crearAlumnos();
+                        break;
+                case 2: notaFinal();
+                        break;
+                case 3: System.out.println("salir");
+                        break;
+                default: System.out.println("Opción NO Válida");
+                        break;
+            }
+            
+        } while (opcion != 3);
+    }
     
 }

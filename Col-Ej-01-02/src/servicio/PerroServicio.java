@@ -16,15 +16,20 @@ import java.util.Scanner;
  */
 public class PerroServicio {
     
-    Scanner leer = new Scanner(System.in);
-            
-    ArrayList<Perro> razas = new ArrayList();
+    private Scanner leer;
+    private ArrayList<Perro> razas;
+    
+    public PerroServicio() {
+        this.leer = new Scanner(System.in);
+        this.razas = new ArrayList();
+    }
             
     public void cargarRazas() {
         
         int opcion;
         
         do {
+            leer.skip("\n");
             System.out.println("Ingrese la raza del perro: ");
             String raza = leer.nextLine();
             razas.add(new Perro(raza));
@@ -32,9 +37,8 @@ public class PerroServicio {
             System.out.println("");
             System.out.println("Elige una opcion:");
             System.out.println("1 - Guardar otro perro");
-            System.out.println("2 - Salir");
+            System.out.println("2 - Salir al menú principal");
             opcion = leer.nextInt();
-            leer.skip("\n");
             
         } while (opcion != 2);        
     }
@@ -59,6 +63,7 @@ la lista ordenada.
         Iterator<Perro> it = razas.iterator();
         int cont = 0;
         
+        leer.skip("\n");
         System.out.println("Ingresar la raza del perro que desea eliminar:");
         String perroElim = leer.nextLine();
         
@@ -78,7 +83,33 @@ la lista ordenada.
         mostrarPerros();
     }
     
-    
+    public void menu() {
+        int opcion;
+        
+        do {
+            System.out.println("-----------------------------");
+            System.out.println("1. Cargar perros");
+            System.out.println("2. Mostrar lista de perros");
+            System.out.println("3. Eliminar perro");
+            System.out.println("4. Salir");
+            opcion = leer.nextInt();
+            System.out.println("-----------------------------");
+            
+            switch (opcion) {
+                case 1: cargarRazas();
+                        break;
+                case 2: mostrarPerros();
+                        break;
+                case 3: eliminarPerro();
+                        break;
+                case 4: System.out.println("Salir");
+                        break;
+                default: System.out.println("Opcion no Válida");
+                        break;
+            }
+            
+        } while (opcion != 4);
+    }
     
 
     

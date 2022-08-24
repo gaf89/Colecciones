@@ -39,20 +39,22 @@ public class ColEj04 {
         
         PeliculaServicio ps = new PeliculaServicio();
         
-        ps.crearPeliculas();
-        System.out.println("");
-        ps.mostrarPeliculas();
-        System.out.println("");
-        ps.mostrarPeliculasMas1Hora();
-        System.out.println("");
-        ps.ordenarPorDuracionDesc();
-        System.out.println("");
-        ps.ordenarPorDuracionAsce();
-        System.out.println("");
-        ps.ordenarPorTituloAlfa();
-        System.out.println("");
-        ps.ordenarPorDirectorAlfa();
+        ps.menu();
         
+//        ps.crearPeliculas();
+//        System.out.println("");
+//        ps.mostrarPeliculas();
+//        System.out.println("");
+//        ps.mostrarPeliculasMas1Hora();
+//        System.out.println("");
+//        ps.ordenarPorDuracionDesc();
+//        System.out.println("");
+//        ps.ordenarPorDuracionAsce();
+//        System.out.println("");
+//        ps.ordenarPorTituloAlfa();
+//        System.out.println("");
+//        ps.ordenarPorDirectorAlfa();
+//        
     }
     
 }

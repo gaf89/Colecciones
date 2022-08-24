@@ -33,9 +33,10 @@ public class ColEj03 {
         
         AlumnoServicio as = new AlumnoServicio();
         
-        as.crearAlumnos();
+        as.menu();
         
-        as.notaFinal();
+//        as.crearAlumnos();        
+//        as.notaFinal();
     }
     
 }
